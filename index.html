@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salon Cabello & Lounge — Premium Hair • Beauty • Lounge in Owerri</title>
+  <meta name="description" content="Salon Cabello & Lounge — Premium Hair, Beauty & Lounge Experience in Owerri. Book your luxury appointment today." />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <style>
+    /* ─── CUSTOM PROPERTIES ──────────────────────────────────── */
+    :root {
+      --gold:        #d4af77;
+      --gold-dark:   #c9a227;
+      --gold-light:  #fef0cd;
+      --cream:       #faf8f3;
+      /* Burgundy theme (default) */
+      --bg:          #0e0308;
+      --bg-card:     #160a0e;
+      --bg-footer:   #070205;
+      --overlay:     rgba(61, 0, 16, 0.70);
+      --border-col:  rgba(212, 175, 119, 0.15);
+    }
+
+    /* ─── BLACK & GOLD OVERRIDES ─────────────────────────────── */
+    body.theme-black {
+      --bg:          #0a0a0a;
+      --bg-card:     #111111;
+      --bg-footer:   #000000;
+      --overlay:     rgba(0, 0, 0, 0.62);
+      --border-col:  rgba(212, 175, 119, 0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: #e8ddd0;
+      overflow-x: hidden;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; }
+
+    .text-gold { color: var(--gold); }
+    .text-gold-gradient {
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .bg-gold-gradient { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
+    .bg-card { background-color: var(--bg-card); }
+    .section-label {
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* NAVBAR */
+    #mainNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.5rem 0;
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+    #mainNav.scrolled {
+      background: color-mix(in srgb, var(--bg) 95%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.85rem 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .nav-logo-top { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#fff; letter-spacing:0.12em; line-height:1; }
+    .nav-logo-sub { font-family:'Inter',sans-serif; font-size:0.62rem; color:var(--gold); letter-spacing:0.28em; font-weight:600; }
+    .nav-link-custom { color:#c5b8ae; font-size:0.82rem; font-weight:500; letter-spacing:0.04em; transition:color 0.2s; }
+    .nav-link-custom:hover { color:var(--gold); }
+
+    #themeToggle {
+      background:transparent; border:1px solid rgba(255,255,255,0.2); color:#c5b8ae;
+      font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase;
+      padding:0.45rem 0.8rem; cursor:pointer; display:flex; align-items:center; gap:0.45rem;
+      transition:border-color 0.2s,color 0.2s; font-family:'Inter',sans-serif;
+    }
+    #themeToggle:hover { border-color:var(--gold); color:var(--gold); }
+    .theme-dot { width:10px; height:10px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); display:inline-block; }
+
+    .btn-book {
+      background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#0a0204;
+      font-weight:700; font-size:0.8rem; letter-spacing:0.05em; padding:0.6rem 1.2rem;
+      border:none; display:inline-flex; align-items:center; gap:0.45rem;
+      transition:opacity 0.2s,transform 0.2s; border-radius:0;
+    }
+    .btn-book:hover { opacity:0.9; transform:scale(1.02); color:#0a0204; }
+
+    /* HERO */
+    #hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:url('hero.png') center/cover no-repeat; transform:scale(1.08); transition:transform 8s ease; }
+    #hero:hover .hero-bg { transform:scale(1); }
+    .hero-overlay { position:absolute; inset:0; background:var(--overlay); transition:background 0.5s; }
+    .hero-fade { position:absolute; inset:0; background:linear-gradient(to top, var(--bg) 0%, transparent 60%); }
+    .hero-content { position:relative; z-index:2; padding-top:6rem; }
+    .hero-tagline { color:var(--gold); letter-spacing:0.32em; font-size:0.72rem; font-weight:500; text-transform:uppercase; margin-bottom:1.5rem; }
+    .hero-h1 { font-size:clamp(2.6rem,7vw,5.5rem); font-weight:700; color:#fff; line-height:1.1; margin-bottom:1.5rem; }
+    .hero-sub { color:#c5b8ae; font-size:1.05rem; font-weight:300; max-width:580px; margin:0 auto 2.5rem; line-height:1.7; }
+    .btn-hero-outline { border:1px solid rgba(255,255,255,0.3); color:#fff; background:transparent; padding:0.9rem 2rem; font-weight:700; font-size:1rem; border-radius:0; transition:background 0.2s; }
+    .btn-hero-outline:hover { background:rgba(255,255,255,0.1); color:#fff; }
+    .btn-hero-primary { padding:0.9rem 2rem; font-size:1rem; font-weight:700; border-radius:0; }
+
+    /* ABOUT */
+    #about { background-color:var(--bg); padding:7rem 0; }
+    .about-img-wrap { position:relative; }
+    .about-img-wrap img { width:100%; aspect-ratio:4/5; object-fit:cover; box-shadow:0 20px 60px rgba(0,0,0,0.5); position:relative; z-index:1; }
+    .about-img-frame { position:absolute; inset:-1rem; border:1px solid rgba(212,175,119,0.3); transform:translate(1rem,1rem); z-index:0; }
+    .about-stat-val { font-family:'Playfair Display',serif; font-size:1.5rem; color:#fff; }
+    .about-stat-label { color:var(--gold); font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; margin-top:0.2rem; }
+
+    /* SERVICES */
+    #services { background-color:var(--bg-card); padding:7rem 0; }
+    .service-card { position:relative; overflow:hidden; cursor:pointer; }
+    .service-card img { width:100%; aspect-ratio:4/5; object-fit:cover; display:block; transition:transform 0.7s ease; }
+    .service-card:hover img { transform:scale(1.1); }
+    .service-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.35) 55%,transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem; }
+    .service-card-title { font-family:'Playfair Display',serif; font-size:1.05rem; color:#fff; margin-bottom:0.4rem; }
+    .service-card-desc { font-size:0.8rem; color:#c5b8ae; font-weight:300; line-height:1.5; opacity:0; transform:translateY(10px); transition:opacity 0.35s,transform 0.35s; }
+    .service-card:hover .service-card-desc { opacity:1; transform:translateY(0); }
+    .service-card-cta { margin-top:0.8rem; padding-top:0.8rem; border-top:1px solid rgba(255,255,255,0.1); color:var(--gold); font-size:0.78rem; font-weight:600; display:flex; align-items:center; gap:0.3rem; opacity:0; transform:translateY(10px); transition:opacity 0.35s 0.05s,transform 0.35s 0.05s; }
+    .service-card:hover .service-card-cta { opacity:1; transform:translateY(0); }
+    .service-card-border { position:absolute; inset:0; border:1px solid transparent; pointer-events:none; transition:border-color 0.4s; }
+    .service-card:hover .service-card-border { border-color:rgba(212,175,119,0.5); }
+
+    /* GALLERY */
+    #gallery { background-color:var(--bg); padding:7rem 0; }
+    .gallery-item { aspect-ratio:3/4; overflow:hidden; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.7s ease; }
+    .gallery-item:hover img { transform:scale(1.07); }
+
+    /* TESTIMONIALS */
+    #testimonials { background-color:var(--bg-card); padding:7rem 0; }
+    .testimonial-card { background-color:var(--bg); border:1px solid rgba(255,255,255,0.04); padding:2rem; height:100%; transition:border-color 0.3s; }
+    .testimonial-card:hover { border-color:rgba(212,175,119,0.2); }
+    .stars { color:var(--gold); font-size:0.8rem; margin-bottom:1.2rem; }
+    .testimonial-quote { font-size:0.88rem; font-weight:300; color:#c5b8ae; line-height:1.7; font-style:italic; margin-bottom:1.8rem; }
+    .testimonial-avatar { width:46px; height:46px; border-radius:50%; object-fit:cover; border:1px solid rgba(212,175,119,0.3); }
+    .testimonial-name { font-family:'Playfair Display',serif; font-size:1rem; color:#fff; }
+    .testimonial-role { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:#7a6f66; }
+
+    /* CONTACT */
+    #contact { background-color:var(--bg); padding:7rem 0; }
+    .contact-icon-wrap { width:50px; height:50px; border-radius:50%; background-color:var(--bg-card); border:1px solid rgba(255,255,255,0.1); color:var(--gold); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+    .contact-label { font-family:'Playfair Display',serif; font-size:1.05rem; color:#fff; }
+    .contact-value { font-size:0.9rem; font-weight:300; color:#a09387; line-height:1.6; }
+    .map-placeholder { background-color:var(--bg-card); border:1px solid rgba(255,255,255,0.08); min-height:420px; position:relative; overflow:hidden; }
+    .map-dots { position:absolute; inset:0; opacity:0.15; background-image:radial-gradient(var(--gold) 1px,transparent 1px); background-size:22px 22px; }
+    .map-pin-label { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
+    .map-pin-circle { width:52px; height:52px; background:linear-gradient(135deg,var(--gold),var(--gold-dark)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:#0a0204; box-shadow:0 0 30px rgba(212,175,119,0.45); }
+    .map-address-tag { background:rgba(7,2,5,0.88); color:#fff; font-size:0.8rem; font-weight:500; letter-spacing:0.1em; padding:0.45rem 1rem; border-radius:3px; white-space:nowrap; }
+
+    /* FINAL CTA */
+    #cta { background-color:var(--bg-card); padding:7rem 0; position:relative; overflow:hidden; text-align:center; }
+    #cta::before { content:''; position:absolute; inset:0; background:url('hero.png') center/cover no-repeat; opacity:0.07; mix-blend-mode:luminosity; }
+    #cta::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,var(--bg-card),var(--bg)); }
+    .cta-inner { position:relative; z-index:1; }
+    .cta-h2 { font-size:clamp(2.2rem,6vw,4.5rem); color:#fff; font-weight:700; }
+    .btn-cta { padding:1.1rem 3rem; font-size:1.1rem; font-weight:700; border-radius:0; box-shadow:0 0 40px rgba(212,175,119,0.28); }
+
+    /* FOOTER */
+    #footer { background-color:var(--bg-footer); border-top:1px solid rgba(255,255,255,0.05); padding:5rem 0 2.5rem; transition:background-color 0.5s; }
+    .footer-logo-top { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:#fff; letter-spacing:0.1em; }
+    .footer-logo-sub { font-family:'Inter',sans-serif; font-size:0.62rem; color:var(--gold); letter-spacing:0.28em; }
+    .footer-social { width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.05); display:inline-flex; align-items:center; justify-content:center; color:#fff; font-size:1rem; transition:background 0.2s,color 0.2s; }
+    .footer-social:hover { background:var(--gold); color:#0a0204; }
+    .footer-heading { font-family:'Playfair Display',serif; font-size:1rem; color:#fff; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.5rem; }
+    .footer-link { color:#a09387; font-size:0.88rem; font-weight:300; display:block; margin-bottom:0.9rem; transition:color 0.2s; }
+    .footer-link:hover { color:var(--gold); }
+    .footer-divider { border-color:rgba(255,255,255,0.08); margin:2.5rem 0 1.5rem; }
+    .footer-copy { color:#4a4040; font-size:0.78rem; }
+    .demo-note { display:inline-block; background:rgba(212,175,119,0.08); border:1px solid rgba(212,175,119,0.18); color:rgba(212,175,119,0.75); font-size:0.72rem; letter-spacing:0.04em; padding:0.7rem 1.4rem; border-radius:4px; margin-top:0.8rem; }
+
+    /* ANIMATIONS */
+    .fade-up { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width:767px) {
+      .nav-links-desktop { display:none !important; }
+      .hero-h1 { font-size:2.4rem; }
+      #themeToggle span.label { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="mainNav">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="#hero" class="d-flex flex-column" style="text-decoration:none;">
+        <span class="nav-logo-top">SALON</span>
+        <span class="nav-logo-sub">CABELLO</span>
+      </a>
+      <div class="d-flex gap-4 nav-links-desktop">
+        <a href="#about" class="nav-link-custom">Experience</a>
+        <a href="#services" class="nav-link-custom">Services</a>
+        <a href="#gallery" class="nav-link-custom">Gallery</a>
+        <a href="#contact" class="nav-link-custom">Location</a>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <button id="themeToggle" title="Switch theme">
+          <span class="theme-dot" id="themeDot1"></span>
+          <span class="theme-dot" style="background:#d4af77;"></span>
+          <span class="label" id="themeLabel">Burgundy</span>
+        </button>
+        <a href="https://wa.me/2349099340860" target="_blank" class="btn-book">
+          <i class="bi bi-whatsapp"></i>
+          <span class="d-none d-sm-inline">Book Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-content container">
+    <p class="hero-tagline fade-up visible">Premium Hair • Beauty • Lounge Experience in Owerri</p>
+    <h1 class="hero-h1 fade-up visible" style="transition-delay:0.1s">
+      Elevate Your Beauty at<br>
+      <span class="text-gold-gradient fst-italic">Salon Cabello & Lounge</span>
+    </h1>
+    <p class="hero-sub fade-up visible" style="transition-delay:0.2s">
+      Step into Owerri's most exclusive sanctuary of beauty. Where master stylists, premium human hair, and luxury lounging converge.
+    </p>
+    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center fade-up visible" style="transition-delay:0.3s">
+      <a href="https://wa.me/2349099340860" target="_blank" class="btn bg-gold-gradient btn-hero-primary text-dark fw-bold d-inline-flex align-items-center gap-2 justify-content-center">
+        <i class="bi bi-whatsapp fs-5"></i> Book on WhatsApp
+      </a>
+      <a href="#services" class="btn btn-hero-outline">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 fade-up">
+        <div class="about-img-wrap">
+          <img src="shop.png" alt="Salon Cabello Interior" />
+          <div class="about-img-frame"></div>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-up" style="transition-delay:0.15s">
+        <p class="section-label mb-3">The Cabello Experience</p>
+        <h2 class="fw-bold mb-4" style="font-size:clamp(1.9rem,4vw,3rem);color:#fff;line-height:1.2;">
+          Uncompromising Luxury.<br>
+          <span class="fst-italic" style="color:#7a6f66;">Unparalleled Craft.</span>
+        </h2>
+        <p class="mb-3" style="color:#a09387;font-weight:300;font-size:1rem;line-height:1.8;">
+          Located in the heart of Owerri, Salon Cabello & Lounge is more than a beauty destination — it's a sanctuary for those who demand the finest.
+        </p>
+        <p style="color:#a09387;font-weight:300;font-size:1rem;line-height:1.8;">
+          From 100% raw human hair installations to precision barbering, our master stylists bring Lagos-level luxury to Owerri, paired with unmatched hospitality.
+        </p>
+        <div class="row g-4 mt-4">
+          <div class="col-6"><div class="about-stat-val">10+</div><div class="about-stat-label">Master Stylists</div></div>
+          <div class="col-6"><div class="about-stat-val">100%</div><div class="about-stat-label">Premium Hair</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <p class="section-label mb-3">Signature Services</p>
+      <h2 class="fw-bold mb-3" style="color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);">Mastery in Every Detail</h2>
+      <p style="color:#a09387;font-weight:300;max-width:560px;margin:0 auto;">Explore our comprehensive menu of premium beauty and grooming services, tailored for the modern elite.</p>
+    </div>
+    <div class="row g-3">
+      <!-- repeat this block for each service -->
+      <div class="col-6 col-md-4 col-lg-3 fade-up">
+        <div class="service-card">
+          <img src="hair1.png" alt="Haircuts & Styling" />
+          <div class="service-card-overlay">
+            <div class="service-card-title">Haircuts & Styling</div>
+            <div class="service-card-desc">Precision cuts, silk presses, and masterful styling for women.</div>
+            <a href="https://wa.me/2349099340860" class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></a>
+          </div>
+          <div class="service-card-border"></div>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.07s">
+        <div class="service-card"><img src="hero.png" alt="Extensions & Weaves" /><div class="service-card-overlay"><div class="service-card-title">Extensions & Weaves</div><div class="service-card-desc">Flawless frontal, closure, and raw human hair installations.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.14s">
+        <div class="service-card"><img src="hair2.png" alt="Coloring & Highlights" /><div class="service-card-overlay"><div class="service-card-title">Coloring & Highlights</div><div class="service-card-desc">Custom dimensional color, balayage, and vivid transformations.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.21s">
+        <div class="service-card"><img src="hair4.png" alt="Beard Grooming" /><div class="service-card-overlay"><div class="service-card-title">Beard Grooming</div><div class="service-card-desc">Executive grooming, sharp lineups, and luxury beard care for men.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.28s">
+        <div class="service-card"><img src="hair5.png" alt="Glam Makeovers" /><div class="service-card-overlay"><div class="service-card-title">Glam Makeovers</div><div class="service-card-desc">Soft glam to full beat for weddings, events, and photoshoots.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.35s">
+        <div class="service-card"><img src="finger.png" alt="Nail Artistry" /><div class="service-card-overlay"><div class="service-card-title">Nail Artistry</div><div class="service-card-desc">Acrylics, BIAB, intricate nail art, and luxury pedicures.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.42s">
+        <div class="service-card"><img src="face.png" alt="Spa Treatments" /><div class="service-card-overlay"><div class="service-card-title">Spa Treatments</div><div class="service-card-desc">Rejuvenating facials, massages, and skin therapy.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 fade-up" style="transition-delay:0.49s">
+        <div class="service-card"><img src="hair5.png" alt="Relaxing Lounge" /><div class="service-card-overlay"><div class="service-card-title">Relaxing Lounge</div><div class="service-card-desc">Unwind with premium drinks in our exclusive waiting lounge.</div><div class="service-card-cta">Book Service <i class="bi bi-chevron-right"></i></div></div><div class="service-card-border"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 gap-3 fade-up">
+      <div>
+        <p class="section-label mb-2">Our Transformations</p>
+        <h2 class="fw-bold mb-0" style="color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);">The Cabello Muse</h2>
+      </div>
+      <a href="https://wa.me/2349099340860" target="_blank" style="color:#fff;border-bottom:1px solid var(--gold);padding-bottom:3px;font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;">Be Our Next Muse</a>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3 fade-up"><div class="gallery-item"><img src="hair.png" alt="Transformation" /></div></div>
+      <div class="col-6 col-md-3 fade-up" style="transition-delay:0.1s"><div class="gallery-item"><img src="black.png" alt="Transformation" /></div></div>
+      <div class="col-6 col-md-3 fade-up" style="transition-delay:0.2s"><div class="gallery-item"><img src="photoshoot.png" alt="Transformation" /></div></div>
+      <div class="col-6 col-md-3 fade-up" style="transition-delay:0.3s"><div class="gallery-item"><img src="finger.png" alt="Transformation" /></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="text-center mb-5 fade-up">
+      <p class="section-label mb-3">Client Diaries</p>
+      <h2 class="fw-bold" style="color:#fff;font-size:clamp(1.8rem,4vw,2.8rem);">Words from Our Elite</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 fade-up">
+        <div class="testimonial-card">
+          <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testimonial-quote">"The team at Cabello made my wedding day perfect. My frontal installation was flawless, and the makeup stayed pristine all day. True luxury."</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://media.istockphoto.com/id/1444339602/photo/black-woman-african-beauty-and-skincare-health-of-luxury-spa-model-with-a-smile-on-an-orange.jpg?s=612x612&w=0&k=20&c=cwNbqTAyZdi57HBV_J7_9XxKA4rT-DtwvTMqvEJS0gs=" alt="Chioma" class="testimonial-avatar" />
+            <div><div class="testimonial-name">Chioma N.</div><div class="testimonial-role">Bride</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up" style="transition-delay:0.1s">
+        <div class="testimonial-card">
+          <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testimonial-quote">"Finally, a premium grooming spot in Owerri. The executive cut and beard treatment is unmatched. The lounge area is a great touch."</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://media.istockphoto.com/id/157198534/photo/intricate-hair-style-profile-of-a-young-man.jpg?s=612x612&w=0&k=20&c=2BkIhDAQbHxLftMrE2iTF-ifh3cqbCavjLQT_6wiaUo=" alt="Emeka" class="testimonial-avatar" />
+            <div><div class="testimonial-name">Emeka O.</div><div class="testimonial-role">Entrepreneur</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up" style="transition-delay:0.2s">
+        <div class="testimonial-card">
+          <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testimonial-quote">"I drive across town just for their silk press. The ambiance is incredibly relaxing — feels like a high-end spa in Lagos."</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://media.istockphoto.com/id/1394347360/photo/confident-young-black-businesswoman-standing-at-a-window-in-an-office-alone.jpg?s=612x612&w=0&k=20&c=tOFptpFTIaBZ8LjQ1NiPrjKXku9AtERuWHOElfBMBvY=" alt="Adaeze" class="testimonial-avatar" />
+            <div><div class="testimonial-name">Adaeze K.</div><div class="testimonial-role">Regular Client</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 fade-up" style="transition-delay:0.3s">
+        <div class="testimonial-card">
+          <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+          <p class="testimonial-quote">"The quality of their raw human hair is phenomenal. I've had my bundles for a year and they still look brand new after every wash."</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://i.pinimg.com/736x/39/98/d1/3998d1186c5106dd97c2a23d9f262c85.jpg" alt="Blessing" class="testimonial-avatar" />
+            <div><div class="testimonial-name">Blessing U.</div><div class="testimonial-role">Event Planner</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6 fade-up">
+        <p class="section-label mb-3">Visit Us</p>
+        <h2 class="fw-bold mb-3" style="color:#fff;font-size:clamp(1.9rem,4vw,3rem);">Your Throne Awaits.</h2>
+        <p class="mb-5" style="color:#a09387;font-weight:300;font-size:1rem;">Book your appointment today and step into a world of unparalleled beauty and relaxation.</p>
+        <div class="d-flex flex-column gap-4 mb-5">
+          <div class="d-flex gap-3 align-items-start">
+            <div class="contact-icon-wrap"><i class="bi bi-geo-alt-fill"></i></div>
+            <div><div class="contact-label">Location</div><div class="contact-value">57 MCC Road,<br>Owerri, Imo State, Nigeria</div></div>
+          </div>
+          <div class="d-flex gap-3 align-items-start">
+            <div class="contact-icon-wrap"><i class="bi bi-telephone-fill"></i></div>
+            <div><div class="contact-label">Contact</div><div class="contact-value">+234 909 934 0860</div></div>
+          </div>
+          <div class="d-flex gap-3 align-items-start">
+            <div class="contact-icon-wrap"><i class="bi bi-clock-fill"></i></div>
+            <div><div class="contact-label">Hours</div><div class="contact-value">Mon – Sat: 9:00 AM – 8:00 PM<br>Sun: 1:00 PM – 7:00 PM</div></div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem;">
+          <a href="https://wa.me/2349099340860" target="_blank" class="btn bg-gold-gradient text-dark fw-bold d-flex align-items-center justify-content-center gap-2 w-100" style="padding:1rem;font-size:1rem;border-radius:0;">
+            <i class="bi bi-whatsapp fs-5"></i> Message Us on WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6 fade-up" style="transition-delay:0.15s">
+        <div class="map-placeholder">
+          <div class="map-dots"></div>
+          <div class="map-pin-label">
+            <div class="map-pin-circle"><i class="bi bi-geo-alt-fill"></i></div>
+            <div class="map-address-tag">57 MCC Road, Owerri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="cta-inner container">
+    <div class="fade-up">
+      <h2 class="cta-h2 mb-4">Ready to <span class="text-gold-gradient fst-italic">Transform?</span></h2>
+      <p class="mb-5" style="color:#c5b8ae;font-size:1.05rem;font-weight:300;max-width:550px;margin-left:auto;margin-right:auto;">
+        Experience the pinnacle of luxury hair and beauty services in Owerri. Your premium treatment is just a message away.
+      </p>
+      <a href="https://wa.me/2349099340860" target="_blank" class="btn bg-gold-gradient text-dark btn-cta d-inline-flex align-items-center gap-3">
+        <i class="bi bi-whatsapp fs-4"></i> Book Appointment
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="row g-5 mb-4">
+      <div class="col-md-6">
+        <div class="footer-logo-top mb-1">SALON</div>
+        <div class="footer-logo-sub mb-3">CABELLO</div>
+        <p style="color:#a09387;font-weight:300;font-size:0.88rem;max-width:340px;line-height:1.7;margin-bottom:1.5rem;">
+          Premium Hair • Beauty • Lounge Experience in Owerri. The ultimate destination for modern luxury and uncompromising style.
+        </p>
+        <div class="d-flex gap-2">
+          <a href="#" class="footer-social"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="footer-social"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="footer-social"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="footer-heading">Quick Links</div>
+        <a href="#about" class="footer-link">Experience</a>
+        <a href="#services" class="footer-link">Services</a>
+        <a href="#gallery" class="footer-link">Gallery</a>
+        <a href="#contact" class="footer-link">Location</a>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="footer-heading">Contact</div>
+        <p class="footer-link mb-0">57 MCC Road, Owerri</p>
+        <p class="footer-link">Imo State, Nigeria</p>
+        <p style="color:var(--gold);font-size:0.88rem;">+234 909 934 0860</p>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="text-center">
+      <p class="footer-copy mb-2">&copy; <span id="year"></span> Salon Cabello & Lounge. All rights reserved.</p>
+      <div class="demo-note">
+        <strong>NOTE:</strong> This is a FREE professional demo website built to show Salon Cabello &amp; Lounge what their official premium site could look like.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sticky nav
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Theme toggle
+  const btn = document.getElementById('themeToggle');
+  const dot1 = document.getElementById('themeDot1');
+  const label = document.getElementById('themeLabel');
+  let isBurgundy = true;
+
+  function applyTheme() {
+    if (isBurgundy) {
+      document.body.classList.remove('theme-black');
+      dot1.style.background = '#6b0f25';
+      label.textContent = 'Burgundy';
+    } else {
+      document.body.classList.add('theme-black');
+      dot1.style.background = '#0a0a0a';
+      label.textContent = 'Black';
+    }
+  }
+
+  applyTheme();
+  btn.addEventListener('click', () => { isBurgundy = !isBurgundy; applyTheme(); });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
