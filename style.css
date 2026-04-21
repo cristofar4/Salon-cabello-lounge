@@ -49,20 +49,25 @@
       font-weight: 600;
       text-transform: uppercase;
     }
+#mainNav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 80px; /* FIXED HEIGHT */
+  display: flex;
+  align-items: center;
+  transition: background 0.4s, box-shadow 0.4s;
+  padding: 1.5rem 0;
+}
 
-    /* NAVBAR */
-    #mainNav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 1.5rem 0;
-      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
-    }
-    #mainNav.scrolled {
-      background: color-mix(in srgb, var(--bg) 95%, transparent);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 0.85rem 0;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
-    }
+#mainNav.scrolled 
+{
+    padding: 0.85rem 0;
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  /* REMOVE padding shrink */
+}
     .nav-logo-top { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#fff; letter-spacing:0.12em; line-height:1; }
     .nav-logo-sub { font-family:'Inter',sans-serif; font-size:0.62rem; color:var(--gold); letter-spacing:0.28em; font-weight:600; }
     .nav-link-custom { color:#c5b8ae; font-size:0.82rem; font-weight:500; letter-spacing:0.04em; transition:color 0.2s; }
@@ -177,7 +182,20 @@
       .hero-h1 { font-size:2.4rem; }
       #themeToggle span.label { display:none; }
     }
+ .container {
+    margin-top: 12px;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
 
+  #menuToggle {
+    margin-right: 10px; /* shift left from edge */
+  }
+
+  #themeToggle {
+    margin-right: 12px;
+   border-color: rgba(255, 255, 255, 0.336);
+  }
     /* ─── HAMBURGER BUTTON ───────────────────────────────────── */
     #menuToggle {
       display: none;
@@ -187,8 +205,9 @@
       gap: 5px;
       width: 38px;
       height: 38px;
+      left: 0;
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.336);
       cursor: pointer;
       padding: 0;
       flex-shrink: 0;
