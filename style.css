@@ -759,7 +759,7 @@ body.theme-black #readAloudBtn {
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      margin-top: 2rem;
+      margin-top: 0.1rem;
       background: linear-gradient(135deg, var(--gold), var(--gold-dark));
       color: #0a0204;
       font-weight: 700;
