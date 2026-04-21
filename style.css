@@ -23,10 +23,30 @@
 
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar {
+  width: 8px;
+}
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-card);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+body.theme-black ::-webkit-scrollbar-thumb {
+  background: #888; /* or var(--gold-dark) if you want gold */
+}
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: #e8ddd0;
+      padding-top: 80px;
       overflow-x: hidden;
       transition: background-color 0.5s, color 0.5s;
     }
@@ -57,12 +77,10 @@
   display: flex;
   align-items: center;
   transition: background 0.4s, box-shadow 0.4s;
-  padding: 1.5rem 0;
 }
 
 #mainNav.scrolled 
 {
-    padding: 0.85rem 0;
   background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0,0,0,0.4);
@@ -189,7 +207,7 @@
   }
 
   #menuToggle {
-    margin-right: 10px; /* shift left from edge */
+    margin-right: 10px;  /* shift left from edge */
   }
 
   #themeToggle {
@@ -310,3 +328,4 @@
       transition: opacity 0.2s;
     }
     .mobile-book-btn:hover { opacity: 0.88; color: #0a0204; }
+    
